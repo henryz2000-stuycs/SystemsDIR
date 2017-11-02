@@ -1,0 +1,31 @@
+#include <dirent.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/stat.h>
+
+unsigned long get_size(struct dirent *entry){
+  struct stat sb;
+  stat(entry->d_name, &sb);
+  //printf("%s", entry->d_name);
+  return sb.st_size;
+}
+
+char * get_directories(struct dirent *entry){
+  
+}
+
+int main(){
+  DIR * dir = opendir(".");
+  struct dirent *entry = readdir(dir);
+  
+  printf("Statistics for directory: .\n");
+  printf("Total Directory Size: %lu Bytes\n", get_size(entry));
+  printf("Directories:\n");
+  while (entry && readdir(dir)->d_type == ){
+    printf(get_directories(entry));
+    entry = readdir(dir);
+  }
+  //printf(get_files(entry));
+
+  closedir(dir);
+}
